@@ -3,6 +3,7 @@ module etcdloadtest
 go 1.18
 
 require (
+	github.com/bgentry/speakeasy v0.1.0 // indirect
 	github.com/coreos/etcd v3.3.24+incompatible // indirect
 	github.com/coreos/go-semver v0.3.0 // indirect
 	github.com/coreos/go-systemd v0.0.0-20191104093116-d3cd4ed1dbcf // indirect
@@ -17,6 +18,7 @@ require (
 	github.com/sinsharat/etcdloadtest v0.0.0-20170109104625-a1b33067b1ae // indirect
 	github.com/spf13/cobra v1.4.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
+	go.etcd.io/etcd v3.3.24+incompatible // indirect
 	go.uber.org/atomic v1.7.0 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
 	go.uber.org/zap v1.21.0 // indirect

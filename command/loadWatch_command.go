@@ -64,6 +64,8 @@ func performWatchOnPrefixes(ctx context.Context, cmd *cobra.Command, round int) 
 
 	eps := endpointsFromFlag(cmd)
 	dialTimeout := dialTimeoutFromCmd(cmd)
+	sec := secureCfgFromCmd(cmd)
+	auth := authCfgFromCmd(cmd)
 
 	var (
 		revision int64
@@ -72,7 +74,7 @@ func performWatchOnPrefixes(ctx context.Context, cmd *cobra.Command, round int) 
 		err      error
 	)
 
-	client := newClient(eps, dialTimeout)
+	client := newClient(eps, dialTimeout, sec, auth)
 	defer client.Close()
 
 	gr, err = getKey(ctx, client, "non-existent")
@@ -108,7 +110,7 @@ func performWatchOnPrefixes(ctx context.Context, cmd *cobra.Command, round int) 
 
 	for _, prefix := range prefixes {
 		for j := 0; j < watchPerPrefix; j++ {
-			rc := newClient(eps, dialTimeout)
+			rc := newClient(eps, dialTimeout, sec, auth)
 			rcs = append(rcs, rc)
 
 			watchPrefix := roundPrefix + "-" + prefix

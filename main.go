@@ -19,7 +19,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/sinsharat/etcdloadtest/command"
+	"etcdloadtest/command"
 	"github.com/spf13/cobra"
 )
 
@@ -46,7 +46,13 @@ func init() {
 	log.SetFlags(log.Lmicroseconds)
 	rootCmd.PersistentFlags().StringSliceVar(&globalFlags.Endpoints, "endpoints", []string{"127.0.0.1:2379"}, "gRPC endpoints")
 	rootCmd.PersistentFlags().DurationVar(&globalFlags.DialTimeout, "dial-timeout", defaultDialTimeout, "dial timeout for client connections")
-
+	rootCmd.PersistentFlags().StringVar(&globalFlags.CaCert, "cacert", "", "verify certificates of TLS-enabled secure servers using this CA bundle")
+	rootCmd.PersistentFlags().StringVar(&globalFlags.Key, "key", "", "identify secure client using this TLS key file")
+	rootCmd.PersistentFlags().StringVar(&globalFlags.Cert, "cert", "", "identify secure client using this TLS certificate file")
+	rootCmd.PersistentFlags().StringVar(&globalFlags.User, "user", "", "username[:password] for authentication (prompt if password is not supplied)")
+	rootCmd.PersistentFlags().BoolVar(&globalFlags.Insecure, "insecure-transport", true, "disable transport security for client connections")
+	rootCmd.PersistentFlags().BoolVar(&globalFlags.InsecureSkipVerify, "insecure-skip-tls-verify", false, "skip server certificate verification")
+	
 	rootCmd.AddCommand(
 		command.NewLoadPURCommand(),
 		command.NewLoadWatchCommand(),
